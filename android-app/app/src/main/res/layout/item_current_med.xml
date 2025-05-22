@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/bg_sheet"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvCurrentMedName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No hay medicamentos"
+            android:textColor="@color/text_primary"
+            android:textStyle="bold"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/tvCurrentMedStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Desactivado"
+            android:textColor="@color/green"
+            android:layout_marginTop="4dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEndPill"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fin de la Pastilla"
+            android:textColor="@color/text_terciary"
+            android:backgroundTint="@color/accent_blue"
+            android:layout_marginTop="8dp"
+            android:enabled="false"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Alarma"
+        android:id="@+id/alarma"
+        android:icon="@drawable/alarm_selector"
+        android:checked="true" />
+
+    <item
+        android:title="Camara"
+        android:id="@+id/camara"
+        android:icon="@drawable/camera_selector" />
+
+    <item
+        android:title="Calendario"
+        android:id="@+id/calendario"
+        android:icon="@drawable/calendar_selector"/>
+
+    <item
+        android:title="Historial"
+        android:id="@+id/history"
+        android:icon="@drawable/history_selector"/>
+</menu>

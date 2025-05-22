@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_main"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AlarmaMenuFragment">
+
+    <LinearLayout
+        android:id="@+id/ltLogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/icon"/>
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PillPlanner Pro"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCurrentMeds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/ltLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_current_med" />
+
+    <TextView
+        android:id="@+id/tvAlarmasTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alarmas"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/rvCurrentMeds"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageView
+        android:id="@+id/ivMenu"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:tint="@color/text_primary"
+        android:src="@drawable/baseline_edit_square_24"
+        android:contentDescription="Opciones"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvCurrentMeds"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAlarmas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvAlarmasTitle"
+        app:layout_constraintBottom_toTopOf="@+id/fabAddAlarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/fabAddAlarm"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/baseline_add_circle_outline_24"
+        android:layout_marginBottom="20dp"
+        android:contentDescription="Añadir Alarma"
+        app:tint="@color/accent_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
