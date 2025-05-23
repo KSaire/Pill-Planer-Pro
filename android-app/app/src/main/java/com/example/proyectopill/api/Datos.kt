@@ -98,6 +98,21 @@ data class Medicamento(
     var recetaMedica: Boolean?
 )
 
+data class Cita(
+    val idCita: Int,
+    val idUsuario: Int,
+    val fechaHora: String,
+    val descripcion: String?
+)
+data class CitaPeticion(
+    @SerializedName("IdUsuario")
+    val idUsuario: Int,
+    @SerializedName("FechaHora")
+    val fechaHora: String,
+    @SerializedName("Descripcion")
+    val descripcion: String?
+)
+
 data class Mensaje(
     var mensaje: String,
     var exito: Boolean

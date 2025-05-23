@@ -19,8 +19,8 @@ class CrudApi : CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
-    private val urlApi = "http://172.16.24.151:5135/api/"
-    // private val urlApi = "http://192.168.1.15:5135/api/"
+    // private val urlApi = "http://172.16.24.151:5135/api/"
+    private val urlApi = "http://192.168.1.15:5135/api/"
 
     private fun getClient(): OkHttpClient {
         val loggin = HttpLoggingInterceptor()
@@ -221,5 +221,96 @@ class CrudApi : CoroutineScope {
             }
         }
         return respuestaMed
+    }
+
+    fun getAllCitas(): List<Cita>? {
+        var result: List<Cita>? = null
+        runBlocking {
+            var respuesta: Response<List<Cita>>? = null
+            val cor = launch {
+                respuesta = getRetrofit().create(ApiService::class.java).getAllCitas()
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                result = respuesta!!.body()
+            } else {
+                result = null
+            }
+        }
+        return result
+    }
+
+    fun getCitasUsuario(userId: Int): List<Cita>? {
+        var result: List<Cita>? = null
+        runBlocking {
+            var respuesta: Response<List<Cita>>? = null
+            val cor = launch {
+                respuesta = getRetrofit().create(ApiService::class.java).getCitasByUser(userId)
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                result = respuesta!!.body()
+            } else {
+                result = null
+            }
+        }
+        return result
+    }
+
+    fun crearCita(cita: CitaPeticion): Cita? {
+        var result: Cita? = null
+        runBlocking {
+            var respuesta: Response<Cita>? = null
+            val cor = launch {
+                respuesta = getRetrofit().create(ApiService::class.java).createCita(cita)
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                result = respuesta!!.body()
+            } else {
+                result = null
+            }
+        }
+        return result
+    }
+
+    fun actualizarCita(id: Int, cita: CitaPeticion): Cita? {
+        var result: Cita? = null
+        runBlocking {
+            var respuesta: Response<Cita>? = null
+            val cor = launch {
+                respuesta = getRetrofit()
+                    .create(ApiService::class.java)
+                    .updateCita(id, cita)
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                result = respuesta!!.body()
+            } else {
+                result = null
+            }
+        }
+        return result
+    }
+
+    fun borrarCita(id: Int): Mensaje? {
+        var result: Mensaje? = null
+        runBlocking {
+            var respuesta: Response<Mensaje>? = null
+            val cor = launch {
+                respuesta = getRetrofit()
+                    .create(ApiService::class.java)
+                    .deleteCita(id)
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                result = respuesta!!.body() ?: Mensaje("Cita eliminada correctamente", true)
+            } else if (respuesta!!.code() == 404) {
+                result = Mensaje("No se encontró la cita", false)
+            } else {
+                result = Mensaje("Error: ${respuesta!!.code()}", false)
+            }
+        }
+        return result
     }
 }

@@ -31,4 +31,14 @@ interface ApiService {
     suspend fun patchHorarioActivo(@Path("id") id: Int, @Body activa: Boolean): Response<Mensaje>
     @DELETE("UsuarioMedicamentos")
     suspend fun deleteMedUser(@Query("userId") userId: Int, @Query("medCn") medCn: String): Response<Mensaje>
+    @GET("Citas")
+    suspend fun getAllCitas(): Response<List<Cita>>
+    @GET("Citas/usuario/{userId}")
+    suspend fun getCitasByUser(@Path("userId") userId: Int): Response<List<Cita>>
+    @POST("Citas")
+    suspend fun createCita(@Body cita: CitaPeticion): Response<Cita>
+    @PUT("Citas/{id}")
+    suspend fun updateCita(@Path("id") id: Int, @Body cita: CitaPeticion): Response<Cita>
+    @DELETE("Citas/{id}")
+    suspend fun deleteCita(@Path("id") id: Int): Response<Mensaje>
 }

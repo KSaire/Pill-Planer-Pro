@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardCita"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="10dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:strokeColor="@color/bg_sheet"
+    app:strokeWidth="1dp"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tvCita"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="Consulta médico general"
+            android:textSize="16sp"
+            android:textColor="@color/text_primary"/>
+
+        <ImageButton
+            android:id="@+id/btnUpdateCita"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/baseline_edit_square_24"
+            android:contentDescription="Editar cita"
+            app:tint="@color/text_primary"
+            android:background="@color/transparente"
+            android:layout_gravity="center_vertical"/>
+
+        <ImageButton
+            android:id="@+id/btnDeleteCita"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/baseline_delete_24"
+            android:contentDescription="Eliminar cita"
+            app:tint="@color/text_primary"
+            android:background="@color/transparente"
+            android:layout_gravity="center_vertical"/>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
