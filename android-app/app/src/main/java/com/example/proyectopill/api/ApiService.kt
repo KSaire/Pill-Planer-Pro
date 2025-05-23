@@ -34,7 +34,7 @@ interface ApiService {
     @GET("Citas")
     suspend fun getAllCitas(): Response<List<Cita>>
     @GET("Citas/usuario/{userId}")
-    suspend fun getCitasByUser(@Path("userId") userId: Int): Response<List<Cita>>
+    suspend fun getCitasUser(@Path("userId") userId: Int): Response<List<Cita>>
     @POST("Citas")
     suspend fun createCita(@Body cita: CitaPeticion): Response<Cita>
     @PUT("Citas/{id}")

@@ -113,6 +113,17 @@ data class CitaPeticion(
     val descripcion: String?
 )
 
+data class EventoMedicacion(
+    val fechaHora: String,
+    val tomado: Boolean
+)
+
+data class MedicamentoHistorial(
+    val id: Int,
+    val nombre: String,
+    val historial: List<EventoMedicacion>
+)
+
 data class Mensaje(
     var mensaje: String,
     var exito: Boolean

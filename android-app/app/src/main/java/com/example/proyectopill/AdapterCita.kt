@@ -3,6 +3,7 @@ package com.example.proyectopill
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectopill.api.Cita
@@ -15,8 +16,8 @@ class AdapterCita(val llista: MutableList<Cita>, val onEdit: (Cita, Int) -> Unit
                   val onDelete: (Cita, Int) -> Unit): RecyclerView.Adapter<AdapterCita.ViewHolder>() {
     class ViewHolder (vista: View): RecyclerView.ViewHolder(vista) {
         val tvCita = vista.findViewById<TextView>(R.id.tvCita)
-        val btnEdit = vista.findViewById<TextView>(R.id.btnUpdateCita)
-        val btnDelete = vista.findViewById<TextView>(R.id.btnDeleteCita)
+        val btnEdit = vista.findViewById<ImageButton>(R.id.btnUpdateCita)
+        val btnDelete = vista.findViewById<ImageButton>(R.id.btnDeleteCita)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

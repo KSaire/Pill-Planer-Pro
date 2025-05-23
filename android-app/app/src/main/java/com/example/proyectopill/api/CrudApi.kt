@@ -245,7 +245,7 @@ class CrudApi : CoroutineScope {
         runBlocking {
             var respuesta: Response<List<Cita>>? = null
             val cor = launch {
-                respuesta = getRetrofit().create(ApiService::class.java).getCitasByUser(userId)
+                respuesta = getRetrofit().create(ApiService::class.java).getCitasUser(userId)
             }
             cor.join()
             if (respuesta!!.isSuccessful) {
@@ -279,9 +279,7 @@ class CrudApi : CoroutineScope {
         runBlocking {
             var respuesta: Response<Cita>? = null
             val cor = launch {
-                respuesta = getRetrofit()
-                    .create(ApiService::class.java)
-                    .updateCita(id, cita)
+                respuesta = getRetrofit().create(ApiService::class.java).updateCita(id, cita)
             }
             cor.join()
             if (respuesta!!.isSuccessful) {
@@ -298,9 +296,7 @@ class CrudApi : CoroutineScope {
         runBlocking {
             var respuesta: Response<Mensaje>? = null
             val cor = launch {
-                respuesta = getRetrofit()
-                    .create(ApiService::class.java)
-                    .deleteCita(id)
+                respuesta = getRetrofit().create(ApiService::class.java).deleteCita(id)
             }
             cor.join()
             if (respuesta!!.isSuccessful) {

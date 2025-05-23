@@ -43,19 +43,18 @@
         android:textStyle="bold"
         android:textColor="@color/dark_blue"
         android:gravity="center"
-        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@+id/ltLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="380dp"
+        android:layout_height="250dp"
         android:weekSeparatorLineColor="@color/transparente"
-        app:layout_constraintTop_toBottomOf="@id/tvCitasTitle"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/tvCitasTitle" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiDescripcion"
@@ -74,12 +73,12 @@
             android:id="@+id/etDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiHora"
-        android:layout_width="200dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:hint="Hora"
         app:errorTextColor="@color/text_primary"
@@ -95,7 +94,7 @@
             android:id="@+id/etHora"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="time"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -114,9 +113,9 @@
         android:id="@+id/rvCitas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="16dp"
         android:clipToPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/btnSave"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tiHora"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
