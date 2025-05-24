@@ -18,6 +18,8 @@ import java.time.format.TextStyle
 import java.util.Locale
 
 class AdapterHistorialMed(private val context: Context, val meds: MutableList<MedicamentoHistorial>, private val onClick: (MedicamentoHistorial) -> Unit): RecyclerView.Adapter<AdapterHistorialMed.ViewHolder>() {
+    private val expandedPositions = mutableSetOf<Int>()
+
     class ViewHolder (vista: View): RecyclerView.ViewHolder(vista){
         val tvNombre = vista.findViewById<TextView>(R.id.tvNombreMedicamento)
         val eventosLayout = vista.findViewById<LinearLayout>(R.id.eventosLayout)
@@ -33,8 +35,14 @@ class AdapterHistorialMed(private val context: Context, val meds: MutableList<Me
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val med = meds[position]
-        holder.tvNombre.text = med.nombre
+        holder.tvNombre.text = med.nombreMedicamento
         holder.eventosLayout.removeAllViews()
+
+        val eventosAMostrar = if (expandedPositions.contains(position)) {
+            med.historial
+        } else {
+            med.historial.take(3)
+        }
 
         val localeEs = Locale("es", "ES")
         val formatterDia = DateTimeFormatterBuilder()
@@ -43,7 +51,7 @@ class AdapterHistorialMed(private val context: Context, val meds: MutableList<Me
             .toFormatter(localeEs)
         val formatterHora = DateTimeFormatter.ofPattern("HH:mm", localeEs)
 
-        med.historial.take(3).forEach { ev ->
+        eventosAMostrar.forEach { ev ->
             val tv = TextView(context).apply {
                 val icon = if (ev.tomado) "✅" else "❌"
 
@@ -62,12 +70,30 @@ class AdapterHistorialMed(private val context: Context, val meds: MutableList<Me
             holder.eventosLayout.addView(tv)
         }
 
-        holder.card.setOnClickListener { onClick(med) }
+        if (med.historial.size > 3) {
+            val tvToggle = TextView(context).apply {
+                text = if (expandedPositions.contains(position)) "Mostrar menos ↑" else "Mostrar más ↓"
+                setTextColor(context.getColor(R.color.accent_blue))
+                textSize = 14f
+                setPadding(0, 8, 0, 0)
+            }
+            holder.eventosLayout.addView(tvToggle)
+        }
+
+        holder.card.setOnClickListener {
+            if (expandedPositions.contains(position)) {
+                expandedPositions.remove(position)
+            } else {
+                expandedPositions.add(position)
+            }
+            notifyItemChanged(position)
+        }
     }
 
     fun updateList(filtered: List<MedicamentoHistorial>) {
         meds.clear()
         meds.addAll(filtered)
+        expandedPositions.clear()
         notifyDataSetChanged()
     }
 }

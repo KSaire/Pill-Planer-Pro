@@ -344,4 +344,96 @@ class CrudApi : CoroutineScope {
         }
         return resultado
     }
+
+    fun getPacientesDeGestor(medId: Int): List<UsuarioRespuesta>? {
+        var resultado: List<UsuarioRespuesta>? = null
+        runBlocking {
+            var respuesta: Response<List<UsuarioRespuesta>>? = null
+            val cor = launch {
+                respuesta = getRetrofit().create(ApiService::class.java).getPacientesDeGestor(medId)
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                resultado = respuesta!!.body()
+            } else {
+                resultado = null
+            }
+        }
+        return resultado
+    }
+
+    fun getFamiliares(pacienteId: Int): List<UsuarioRespuesta>? {
+        var result: List<UsuarioRespuesta>? = null
+        runBlocking {
+            var response: Response<List<UsuarioRespuesta>>? = null
+            val cor = launch {
+                response = getRetrofit().create(ApiService::class.java).getFamiliares(pacienteId)
+            }
+            cor.join()
+            if (response!!.isSuccessful)
+                result = response!!.body()
+            else
+                null
+        }
+        return result
+    }
+
+    fun addFamiliar(pacienteId: Int, emailFamiliar: String): Mensaje? {
+        var mensaje: Mensaje? = null
+        runBlocking {
+            var response: Response<UsuarioRespuesta>? = null
+            val cor = launch {
+                response = getRetrofit().create(ApiService::class.java).addFamiliar(FamiliarPeticion(pacienteId, emailFamiliar))
+            }
+            cor.join()
+            mensaje = when {
+                response!!.isSuccessful ->
+                    Mensaje("Familiar añadido correctamente", true)
+                response!!.code() == 404 ->
+                    Mensaje("No se encontró ese familiar o paciente", false)
+                response!!.code() == 400 ->
+                    Mensaje(response!!.errorBody()?.string() ?: "Error datos inválidos", false)
+                response!!.code() == 409 ->
+                    Mensaje("Ya existe esa relación", false)
+                else ->
+                    Mensaje("Error: ${response!!.code()}", false)
+            }
+        }
+        return mensaje
+    }
+
+    fun removeFamiliar(pacienteId: Int, familiarId: Int): Mensaje? {
+        var mensaje: Mensaje? = null
+        runBlocking {
+            var response: Response<Mensaje>? = null
+            val cor = launch {
+                response = getRetrofit().create(ApiService::class.java).removeFamiliar(pacienteId, familiarId)
+            }
+            cor.join()
+            if (response!!.isSuccessful) {
+                mensaje = Mensaje(response!!.body()?.mensaje ?: "Familiar eliminado", true)
+            } else if (response!!.code() == 404) {
+                mensaje = Mensaje("No existe esa relación", false)
+            } else {
+                mensaje = Mensaje("Error: ${response!!.code()}", false)
+            }
+        }
+        return mensaje
+    }
+
+    fun getUsuariosByRol(rol: String): List<UsuarioRespuesta>? {
+        var result: List<UsuarioRespuesta>? = null
+        runBlocking {
+            var response: Response<List<UsuarioRespuesta>>? = null
+            val cor = launch {
+                response = getRetrofit().create(ApiService::class.java).getUsuariosByRol(rol)
+            }
+            cor.join()
+            if (response!!.isSuccessful)
+                result = response!!.body()
+            else
+                null
+        }
+        return result
+    }
 }

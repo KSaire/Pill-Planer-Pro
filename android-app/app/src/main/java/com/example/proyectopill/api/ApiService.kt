@@ -45,4 +45,14 @@ interface ApiService {
     suspend fun getHistorialUsuario(@Path("userId") userId: Int): Response<List<MedicamentoHistorial>>
     @POST("Historiales")
     suspend fun createHistorial(@Body hist: HistorialPeticion): Response<Historial>
+    @GET("Usuarios/gestor/{medId}/pacientes")
+    suspend fun getPacientesDeGestor(@Path("medId") medId: Int): Response<List<UsuarioRespuesta>>
+    @GET("Usuarios/familiares/{pacienteId}")
+    suspend fun getFamiliares(@Path("pacienteId") pacienteId: Int): Response<List<UsuarioRespuesta>>
+    @POST("Usuarios/familiares")
+    suspend fun addFamiliar(@Body peticion: FamiliarPeticion): Response<UsuarioRespuesta>
+    @DELETE("Usuarios/familiares")
+    suspend fun removeFamiliar(@Query("pacienteId") pacienteId: Int, @Query("familiarId") familiarId: Int): Response<Mensaje>
+    @GET("Usuarios/rol/{rolName}")
+    suspend fun getUsuariosByRol(@Path("rolName") rolName: String): Response<List<UsuarioRespuesta>>
 }

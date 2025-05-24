@@ -119,8 +119,8 @@ data class EventoMedicacion(
 )
 
 data class MedicamentoHistorial(
-    val id: Int,
-    val nombre: String,
+    val idUsuarioMedicamento: Int,
+    val nombreMedicamento: String,
     val historial: List<EventoMedicacion>
 )
 
@@ -137,6 +137,13 @@ data class Historial(
     val idHorario: Int,
     val fechaHora: String,
     val tomado: Boolean
+)
+
+data class FamiliarPeticion(
+    @SerializedName("PacienteId")
+    val pacienteId: Int,
+    @SerializedName("EmailFamiliar")
+    val emailFamiliar: String
 )
 
 data class Mensaje(

@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="cambiar_tema" />
+    <string name="listaDePacientes">Esta es la lista de pacientes de los que está a cargo</string>
+    <string name="listaDePacientes2">Esta es la lista de pacientes que tiene permitido ver</string>
+    <string name="descpPaciente">Para mayor seguridad, te recomendamos añadir el correo electrónico de un familiar o cuidador. En caso de que olvides tomar tu medicamento, recibirán una notificación para recordártelo.</string>
 </resources>

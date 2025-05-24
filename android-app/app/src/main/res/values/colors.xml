@@ -5,6 +5,7 @@
     <color name="text_terciary">#FFFFFF</color>
     <color name="bg_main">#FFFFFFFF</color>
     <color name="bg_sheet">#DCDCDC</color>
+    <color name="selected_blue">#034BB3</color>
     <color name="accent_blue">#4C88EC</color>
     <color name="dark_blue">#222771</color>
     <color name="accent_purple">#7459EF</color>
