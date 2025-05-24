@@ -50,6 +50,92 @@ namespace Api_Proyecto_Final.Controllers
             }
         }
 
+        [HttpGet("gestor/{medId}/pacientes")]
+        public async Task<ActionResult<IEnumerable<UsuarioRespuestaDTO>>> GetPacientesDeGestor(int medId)
+        {
+            try
+            {
+                var medico = await _context.Usuarios
+                    .Include(u => u.IdPacientes)
+                    .FirstOrDefaultAsync(u => u.Id == medId);
+
+                if (medico == null)
+                    return NotFound($"No existe ningún médico con Id {medId}.");
+
+                var resultado = medico.IdPacientes
+                    .Select(p => new UsuarioRespuestaDTO
+                    {
+                        Id = p.Id,
+                        Email = p.Email,
+                        Nombre = p.Nombre
+                    })
+                    .ToList();
+
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[GET pacientes de gestor] Error: {ex.Message}");
+                return StatusCode(500, "Error interno al obtener la lista de pacientes.");
+            }
+        }
+
+        [HttpGet("familiares/{pacienteId}")]
+        public async Task<ActionResult<IEnumerable<UsuarioRespuestaDTO>>> GetFamiliares(int pacienteId)
+        {
+            try
+            {
+                var paciente = await _context.Usuarios.Include(u => u.IdGestors).FirstOrDefaultAsync(u => u.Id == pacienteId);
+
+                if (paciente == null)
+                    return NotFound($"No existe paciente con Id {pacienteId}.");
+
+                var familiares = paciente.IdGestors
+                    .Select(f => new UsuarioRespuestaDTO
+                    {
+                        Id = f.Id,
+                        Nombre = f.Nombre,
+                        Email = f.Email,
+                        IdRols = f.IdRols.Select(r => r.Nombre).ToList()
+                    })
+                    .ToList();
+
+                return Ok(familiares);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[GET familiares] Error: {ex.Message}");
+                return StatusCode(500, "Error interno al obtener familiares.");
+            }
+        }
+
+        [HttpGet("rol/{rolName}")]
+        public async Task<ActionResult<IEnumerable<UsuarioRespuestaDTO>>> GetUsuariosPorRol(string rolName)
+        {
+            try
+            {
+                var rolNormalized = rolName.Trim().ToLower();
+
+                var lista = await _context.Usuarios
+                    .Include(u => u.IdRols)
+                    .Where(u => u.IdRols.Any(r => r.Nombre.ToLower() == rolNormalized))
+                    .Select(u => new UsuarioRespuestaDTO
+                    {
+                        Id = u.Id,
+                        Nombre = u.Nombre,
+                        Email = u.Email,
+                        IdRols = u.IdRols.Select(r => r.Nombre).ToList()
+                    })
+                    .ToListAsync();
+
+                return Ok(lista);
+            } catch (Exception ex)
+            {
+                Console.WriteLine($"[GET familiares] Error: {ex.Message}");
+                return StatusCode(500, "Error interno al obtener familiares.");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostUsuario([FromBody] UsuarioPeticionDTO udto)
         {
@@ -58,33 +144,56 @@ namespace Api_Proyecto_Final.Controllers
 
             try
             {
-                var existe = await _context.Usuarios.AnyAsync(u => u.Email == udto.Email);
-                if (existe)
-                    return Conflict("Ya existe un usuario registrado con ese correo.");
+                var rolEntidad = await _context.Rols.FirstOrDefaultAsync(r => r.Nombre.ToLower() == udto.Rol.ToLower());
+                if (rolEntidad == null)
+                    return BadRequest("El rol especificado no existe.");
 
-                var rol = await _context.Rols.Where(r => r.Nombre.ToLower() == udto.Rol).ToListAsync();
+                var usuarioExistente = await _context.Usuarios.Include(u => u.IdRols)
+                        .FirstOrDefaultAsync(u => u.Email == udto.Email);
 
                 using (var transaction = await _context.Database.BeginTransactionAsync())
                 {
-                    var usuario = new Usuario
+                    if (usuarioExistente == null)
                     {
-                        Nombre = udto.Nombre,
-                        Email = udto.Email,
-                        Contrasena = udto.Contrasena,
-                        IdRols = rol
-                    };
-                    _context.Usuarios.Add(usuario);
-                    await _context.SaveChangesAsync();
-                    await transaction.CommitAsync();
+                        var nuevoUser = new Usuario
+                        {
+                            Nombre = udto.Nombre,
+                            Email = udto.Email,
+                            Contrasena = udto.Contrasena,
+                            IdRols = new List<Rol> { rolEntidad }
+                        };
+                        _context.Usuarios.Add(nuevoUser);
+                        await _context.SaveChangesAsync();
+                        await transaction.CommitAsync();
 
-                    return Ok(new UsuarioRespuestaDTO
+                        return Ok(new UsuarioRespuestaDTO
+                        {
+                            Id = nuevoUser.Id,
+                            Nombre = nuevoUser.Nombre,
+                            Contrasena = nuevoUser.Contrasena,
+                            Email = nuevoUser.Email,
+                            IdRols = nuevoUser.IdRols.Select(r => r.Nombre).ToList()
+                        });
+                    }
+                    else
                     {
-                        Id = usuario.Id,
-                        Nombre = usuario.Nombre,
-                        Contrasena = usuario.Contrasena,
-                        Email = usuario.Email,
-                        IdRols = usuario.IdRols.Select(r => r.Nombre.ToLower()).ToList()
-                    });
+                        if (usuarioExistente.IdRols.Any(r => r.IdRol == rolEntidad.IdRol))
+                            return Conflict("Este correo ya está registrado con ese mismo rol.");
+
+                        usuarioExistente.IdRols.Add(rolEntidad);
+                        _context.Usuarios.Update(usuarioExistente);
+                        await _context.SaveChangesAsync();
+                        await transaction.CommitAsync();
+
+                        return Ok(new UsuarioRespuestaDTO
+                        {
+                            Id = usuarioExistente.Id,
+                            Nombre = usuarioExistente.Nombre,
+                            Contrasena = usuarioExistente.Contrasena,
+                            Email = usuarioExistente.Email,
+                            IdRols = usuarioExistente.IdRols.Select(r => r.Nombre).ToList()
+                        });
+                    }
                 }
             }
             catch (Exception ex)
@@ -104,7 +213,7 @@ namespace Api_Proyecto_Final.Controllers
             {
                 var rolSolicitado = udto.Rol.Trim().ToLower();
                 var usuario = await _context.Usuarios.Include(u => u.IdRols).FirstOrDefaultAsync
-                    (u => u.Email == udto.Email && u.Contrasena == udto.Contrasena );
+                    (u => u.Email == udto.Email && u.Contrasena == udto.Contrasena);
 
                 if (usuario == null)
                     return Unauthorized("Email o contraseña incorrectos.");
@@ -132,6 +241,57 @@ namespace Api_Proyecto_Final.Controllers
             }
         }
 
+        [HttpPost("familiares")]
+        public async Task<IActionResult> AddFamiliar([FromBody] FamiliarPeticionDTO dto)
+        {
+            if (dto == null)
+                return BadRequest("Datos inválidos.");
+
+            try
+            {
+                var paciente = await _context.Usuarios.Include(u => u.IdGestors).FirstOrDefaultAsync(u => u.Id == dto.PacienteId);
+                if (paciente == null)
+                    return NotFound($"Paciente {dto.PacienteId} no encontrado.");
+
+                var user = await _context.Usuarios.Include(u => u.IdRols).FirstOrDefaultAsync(u => u.Email == dto.EmailFamiliar);
+                if (user == null)
+                    return NotFound($"No existe usuario con email '{dto.EmailFamiliar}'.");
+
+                if (user.Id == paciente.Id)
+                    return BadRequest("Un paciente no puede añadirse a sí mismo como familiar.");
+
+                string rolFamiliar = "familiar";
+
+                var tieneRolFamiliar = user.IdRols.Any(r => r.Nombre.ToLower() == rolFamiliar); ;
+                if (!tieneRolFamiliar)
+                    return BadRequest("El usuario encontrado no tiene el rol de familiar.");
+
+                if (paciente.IdGestors.Any(f => f.Id == user.Id))
+                    return Conflict("Ese familiar ya está asociado a este paciente.");
+
+                var resp = new UsuarioRespuestaDTO
+                {
+                    Id = user.Id,
+                    Nombre = user.Nombre,
+                    Email = user.Email,
+                    IdRols = user.IdRols.Select(r => r.Nombre).ToList()
+                };
+
+                using (var transaction = await _context.Database.BeginTransactionAsync())
+                {
+                    paciente.IdGestors.Add(user);
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                return Ok(resp);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[POST familiares] Error: {ex.Message}");
+                return StatusCode(500, "Error interno al asociar familiar.");
+            }
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUsuario(int id, [FromBody] UsuarioPeticionDTO udto)
         {
@@ -151,9 +311,9 @@ namespace Api_Proyecto_Final.Controllers
                     usuario.Nombre = udto.Nombre;
                     usuario.Email = udto.Email;
                     usuario.Contrasena = udto.Contrasena;
-                    if (udto.FechaNacimiento.HasValue) 
+                    if (udto.FechaNacimiento.HasValue)
                         usuario.FechaNacimiento = udto.FechaNacimiento;
-                    
+
                     if (!string.IsNullOrWhiteSpace(udto.Telefono))
                         usuario.Telefono = udto.Telefono;
 
@@ -218,6 +378,36 @@ namespace Api_Proyecto_Final.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpDelete("familiares")]
+        public async Task<IActionResult> RemoveFamiliar(int pacienteId, int familiarId)
+        {
+            try
+            {
+                var paciente = await _context.Usuarios.Include(u => u.IdGestors).FirstOrDefaultAsync(u => u.Id == pacienteId);
+                if (paciente == null)
+                    return NotFound($"Paciente {pacienteId} no existe.");
+
+                var fam = paciente.IdGestors.FirstOrDefault(f => f.Id == familiarId);
+                if (fam == null)
+                    return NotFound("Ese familiar no está asociado al paciente.");
+
+                
+                using (var tx = await _context.Database.BeginTransactionAsync())
+                {
+                    paciente.IdGestors.Remove(fam);
+                    await _context.SaveChangesAsync();
+                    await tx.CommitAsync();
+                }
+
+                return Ok(new { mensaje = "Familiar desasociado correctamente", exito = true });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[DELETE familiares] Error: {ex.Message}");
+                return StatusCode(500, "Error interno al desasociar familiar.");
+            }
         }
     }
 }

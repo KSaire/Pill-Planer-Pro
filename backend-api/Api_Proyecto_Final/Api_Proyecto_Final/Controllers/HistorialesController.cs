@@ -58,31 +58,24 @@ namespace Api_Proyecto_Final.Controllers
         {
             try
             {
-                var ums = await _context.UsuarioMedicamentos
-                    .Include(um => um.CnMedNavigation)
-                    .Where(um => um.IdUsuario == userId)
-                    .ToListAsync();
+                var ums = await _context.UsuarioMedicamentos.Include(um => um.CnMedNavigation).Where(um => um.IdUsuario == userId).ToListAsync();
 
                 var result = new List<MedicamentoHistorialDTO>(ums.Count);
 
                 foreach (var um in ums)
                 {
-                    var eventos = await _context.Historiales
-                                      .Where(h => h.IdUsuarioMedicamento == um.Id)
-                                      .OrderByDescending(h => h.FechaHora)
-                                      .Select(h => new EventoMedicacionDTO
-                                      {
-                                          FechaHora = h.FechaHora,
-                                          Tomado = h.Tomado
-                                      })
-                                      .ToListAsync();
+                    var eventos = await _context.Historiales.Where(h => h.IdUsuarioMedicamento == um.Id).OrderByDescending(h => h.FechaHora)
+                        .Select(h => new EventoMedicacionDTO{ FechaHora = h.FechaHora,Tomado = h.Tomado }).ToListAsync();
 
-                    result.Add(new MedicamentoHistorialDTO
+                    if (eventos.Any())
                     {
-                        IdUsuarioMedicamento = um.Id,
-                        NombreMedicamento = um.CnMedNavigation.Nombre,
-                        Historial = eventos
-                    });
+                        result.Add(new MedicamentoHistorialDTO
+                        {
+                            IdUsuarioMedicamento = um.Id,
+                            NombreMedicamento = um.CnMedNavigation.Nombre,
+                            Historial = eventos
+                        });
+                    }
                 }
 
                 return Ok(result);

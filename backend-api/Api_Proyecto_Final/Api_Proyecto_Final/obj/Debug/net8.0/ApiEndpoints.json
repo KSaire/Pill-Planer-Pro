@@ -1121,6 +1121,95 @@
   },
   {
     "ContainingType": "Api_Proyecto_Final.Controllers.UsuariosController",
+    "Method": "AddFamiliar",
+    "RelativePath": "api/Usuarios/familiares",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Api_Proyecto_Final.Models.FamiliarPeticionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api_Proyecto_Final.Controllers.UsuariosController",
+    "Method": "RemoveFamiliar",
+    "RelativePath": "api/Usuarios/familiares",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pacienteId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "familiarId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api_Proyecto_Final.Controllers.UsuariosController",
+    "Method": "GetFamiliares",
+    "RelativePath": "api/Usuarios/familiares/{pacienteId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pacienteId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Api_Proyecto_Final.Models.UsuarioRespuestaDTO, Api_Proyecto_Final, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_Proyecto_Final.Controllers.UsuariosController",
+    "Method": "GetPacientesDeGestor",
+    "RelativePath": "api/Usuarios/gestor/{medId}/pacientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "medId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Api_Proyecto_Final.Models.UsuarioRespuestaDTO, Api_Proyecto_Final, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_Proyecto_Final.Controllers.UsuariosController",
     "Method": "LoginUsuario",
     "RelativePath": "api/Usuarios/login",
     "HttpMethod": "POST",
@@ -1134,5 +1223,31 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Api_Proyecto_Final.Controllers.UsuariosController",
+    "Method": "GetUsuariosPorRol",
+    "RelativePath": "api/Usuarios/rol/{rolName}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rolName",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Api_Proyecto_Final.Models.UsuarioRespuestaDTO, Api_Proyecto_Final, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]
