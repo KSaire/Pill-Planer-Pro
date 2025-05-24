@@ -13,6 +13,8 @@ import com.example.proyectopill.api.MedicamentoHistorial
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
+import java.time.format.TextStyle
 import java.util.Locale
 
 class AdapterHistorialMed(private val context: Context, val meds: MutableList<MedicamentoHistorial>, private val onClick: (MedicamentoHistorial) -> Unit): RecyclerView.Adapter<AdapterHistorialMed.ViewHolder>() {
@@ -33,15 +35,26 @@ class AdapterHistorialMed(private val context: Context, val meds: MutableList<Me
         val med = meds[position]
         holder.tvNombre.text = med.nombre
         holder.eventosLayout.removeAllViews()
+
+        val localeEs = Locale("es", "ES")
+        val formatterDia = DateTimeFormatterBuilder()
+            .appendPattern("d ")
+            .appendText(java.time.temporal.ChronoField.MONTH_OF_YEAR, TextStyle.SHORT)
+            .toFormatter(localeEs)
+        val formatterHora = DateTimeFormatter.ofPattern("HH:mm", localeEs)
+
         med.historial.take(3).forEach { ev ->
             val tv = TextView(context).apply {
                 val icon = if (ev.tomado) "✅" else "❌"
 
-                val dt = LocalDateTime.parse(ev.fechaHora).atZone(ZoneId.systemDefault())
-                val dia = dt.format(DateTimeFormatter.ofPattern("d MMM", Locale("es")))
-                val hora = dt.format(DateTimeFormatter.ofPattern("HH:mm"))
+                val dt = LocalDateTime.parse(ev.fechaHora).atZone(ZoneId.systemDefault()).toLocalDateTime()
+                val dia = dt.format(formatterDia)
+                val hora = dt.format(formatterHora)
 
-                text = "$icon $dia – ${if (ev.tomado) "Tomado a las" else "Olvidado"} $hora"
+                text = if (ev.tomado)
+                    "$icon $dia – Tomado a las $hora"
+                else
+                    "$icon $dia – Olvidado"
                 setTextColor(context.getColor(R.color.text_primary))
                 textSize = 14f
                 setPadding(0, 4, 0, 4)

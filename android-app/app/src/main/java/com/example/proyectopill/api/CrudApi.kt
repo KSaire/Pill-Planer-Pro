@@ -309,4 +309,39 @@ class CrudApi : CoroutineScope {
         }
         return result
     }
+
+    fun getHistorialUsuario(userId: Int): List<MedicamentoHistorial>? {
+        var resultado: List<MedicamentoHistorial>? = null
+        runBlocking {
+            var respuesta: Response<List<MedicamentoHistorial>>? = null
+            val cor = launch {
+                respuesta = getRetrofit().create(ApiService::class.java).getHistorialUsuario(userId)
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                resultado = respuesta!!.body()
+            } else {
+                resultado = null
+            }
+        }
+
+        return resultado
+    }
+
+    fun postHistorial(hist: HistorialPeticion): Historial? {
+        var resultado: Historial? = null
+        runBlocking {
+            var respuesta: Response<Historial>? = null
+            val cor = launch {
+                respuesta = getRetrofit().create(ApiService::class.java).createHistorial(hist)
+            }
+            cor.join()
+            if (respuesta!!.isSuccessful) {
+                resultado = respuesta!!.body()
+            } else {
+                resultado = null
+            }
+        }
+        return resultado
+    }
 }

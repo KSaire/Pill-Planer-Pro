@@ -124,6 +124,21 @@ data class MedicamentoHistorial(
     val historial: List<EventoMedicacion>
 )
 
+data class HistorialPeticion(
+    val idUsuarioMedicamento: Int,
+    val idHorario: Int,
+    val fechaHora: String,
+    val tomado: Boolean
+)
+
+data class Historial(
+    val idHistorial: Int,
+    val idUsuarioMedicamento: Int,
+    val idHorario: Int,
+    val fechaHora: String,
+    val tomado: Boolean
+)
+
 data class Mensaje(
     var mensaje: String,
     var exito: Boolean

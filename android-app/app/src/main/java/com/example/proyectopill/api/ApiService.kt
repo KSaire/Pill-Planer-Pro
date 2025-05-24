@@ -41,4 +41,8 @@ interface ApiService {
     suspend fun updateCita(@Path("id") id: Int, @Body cita: CitaPeticion): Response<Cita>
     @DELETE("Citas/{id}")
     suspend fun deleteCita(@Path("id") id: Int): Response<Mensaje>
+    @GET("Historiales/usuario/{userId}")
+    suspend fun getHistorialUsuario(@Path("userId") userId: Int): Response<List<MedicamentoHistorial>>
+    @POST("Historiales")
+    suspend fun createHistorial(@Body hist: HistorialPeticion): Response<Historial>
 }
