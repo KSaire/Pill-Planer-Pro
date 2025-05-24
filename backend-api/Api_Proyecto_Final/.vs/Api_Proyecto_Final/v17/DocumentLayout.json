@@ -1,0 +1,141 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|c:\\users\\cv\\source\\repos\\api_proyecto_final\\api_proyecto_final\\controllers\\medicamentoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|solutionrelative:api_proyecto_final\\controllers\\medicamentoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|c:\\users\\cv\\source\\repos\\api_proyecto_final\\api_proyecto_final\\controllers\\historialescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|solutionrelative:api_proyecto_final\\controllers\\historialescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|c:\\users\\cv\\source\\repos\\api_proyecto_final\\api_proyecto_final\\controllers\\usuariomedicamentoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|solutionrelative:api_proyecto_final\\controllers\\usuariomedicamentoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|c:\\users\\cv\\source\\repos\\api_proyecto_final\\api_proyecto_final\\controllers\\citascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|solutionrelative:api_proyecto_final\\controllers\\citascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|c:\\users\\cv\\source\\repos\\api_proyecto_final\\api_proyecto_final\\models\\historial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|solutionrelative:api_proyecto_final\\models\\historial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|c:\\users\\cv\\source\\repos\\api_proyecto_final\\api_proyecto_final\\controllers\\horarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|solutionrelative:api_proyecto_final\\controllers\\horarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|c:\\users\\cv\\source\\repos\\api_proyecto_final\\api_proyecto_final\\models\\horariocreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{16846E3C-7282-4D9D-B11E-03685DB1829C}|Api_Proyecto_Final\\Api_Proyecto_Final.csproj|solutionrelative:api_proyecto_final\\models\\horariocreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MedicamentosController.cs",
+              "DocumentMoniker": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\MedicamentosController.cs",
+              "RelativeDocumentMoniker": "Api_Proyecto_Final\\Controllers\\MedicamentosController.cs",
+              "ToolTip": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\MedicamentosController.cs",
+              "RelativeToolTip": "Api_Proyecto_Final\\Controllers\\MedicamentosController.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAmwEYAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T12:56:38.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HistorialesController.cs",
+              "DocumentMoniker": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\HistorialesController.cs",
+              "RelativeDocumentMoniker": "Api_Proyecto_Final\\Controllers\\HistorialesController.cs",
+              "ToolTip": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\HistorialesController.cs",
+              "RelativeToolTip": "Api_Proyecto_Final\\Controllers\\HistorialesController.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAEwDsAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T10:48:06.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Historial.cs",
+              "DocumentMoniker": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Models\\Historial.cs",
+              "RelativeDocumentMoniker": "Api_Proyecto_Final\\Models\\Historial.cs",
+              "ToolTip": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Models\\Historial.cs",
+              "RelativeToolTip": "Api_Proyecto_Final\\Models\\Historial.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-24T10:21:25.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CitasController.cs",
+              "DocumentMoniker": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\CitasController.cs",
+              "RelativeDocumentMoniker": "Api_Proyecto_Final\\Controllers\\CitasController.cs",
+              "ToolTip": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\CitasController.cs",
+              "RelativeToolTip": "Api_Proyecto_Final\\Controllers\\CitasController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAJYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-23T09:16:10.818Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UsuarioMedicamentosController.cs",
+              "DocumentMoniker": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\UsuarioMedicamentosController.cs",
+              "RelativeDocumentMoniker": "Api_Proyecto_Final\\Controllers\\UsuarioMedicamentosController.cs",
+              "ToolTip": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\UsuarioMedicamentosController.cs",
+              "RelativeToolTip": "Api_Proyecto_Final\\Controllers\\UsuarioMedicamentosController.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAIwKIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-22T13:07:36.919Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HorariosController.cs",
+              "DocumentMoniker": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\HorariosController.cs",
+              "RelativeDocumentMoniker": "Api_Proyecto_Final\\Controllers\\HorariosController.cs",
+              "ToolTip": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Controllers\\HorariosController.cs",
+              "RelativeToolTip": "Api_Proyecto_Final\\Controllers\\HorariosController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T07:55:34.341Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "HorarioCreateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Models\\HorarioCreateDTO.cs",
+              "RelativeDocumentMoniker": "Api_Proyecto_Final\\Models\\HorarioCreateDTO.cs",
+              "ToolTip": "C:\\Users\\cv\\source\\repos\\Api_Proyecto_Final\\Api_Proyecto_Final\\Models\\HorarioCreateDTO.cs",
+              "RelativeToolTip": "Api_Proyecto_Final\\Models\\HorarioCreateDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-21T07:54:05.492Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
